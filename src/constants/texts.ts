@@ -5,4 +5,11 @@ export const texts = {
   inquiry: "조회",
   searchedData: "검색된 데이터 : ",
   count: "건",
+  productNumber: "상품번호",
+  productName: "상품명",
+  brandName: "브랜드",
+  productContent: "상품내용",
+  price: "가격",
+  grade: "평점",
+  stock: "재고",
 };
