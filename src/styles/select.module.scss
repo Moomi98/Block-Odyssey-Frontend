@@ -1,0 +1,39 @@
+@import "variables.scss";
+
+.container {
+  width: 70px;
+  height: 30px;
+  display: flex;
+  position: relative;
+  background-color: white;
+  align-items: center;
+  padding: 5px 5px;
+  border-radius: 3px;
+  border: 1px solid $border;
+}
+
+.label {
+  width: 100%;
+  padding: 5px;
+}
+
+.arrow {
+  cursor: pointer;
+}
+
+.optionList {
+  position: absolute;
+  background-color: white;
+  border: 1px solid $border;
+  width: 70px;
+  bottom: 12px;
+  left: -1px;
+  padding: 5px 10px;
+}
+
+.optionItem {
+  list-style: none;
+  padding: 5px 0;
+  text-align: start;
+  cursor: pointer;
+}

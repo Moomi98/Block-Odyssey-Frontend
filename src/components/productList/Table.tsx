@@ -18,32 +18,34 @@ const Table = ({ products }: tableProps) => {
         <p className={styles.divisionText}>{texts.grade}</p>
         <p className={styles.divisionText}>{texts.stock}</p>
       </div>
-      {products.map((product) => (
-        <div className={styles.column}>
-          <div className={styles.textContainer}>
-            <p className={styles.columnText}>{product.id}</p>
-          </div>
-          <div className={styles.textContainer}>
-            <p className={styles.columnText}>{product.title}</p>
-          </div>
-          <div className={styles.textContainer}>
-            <p className={styles.columnText}>{product.brand}</p>
-          </div>
+      <div className={styles.productlist}>
+        {products.map((product) => (
+          <div className={styles.column}>
+            <div className={styles.textContainer}>
+              <p className={styles.columnText}>{product.id}</p>
+            </div>
+            <div className={styles.textContainer}>
+              <p className={styles.columnText}>{product.title}</p>
+            </div>
+            <div className={styles.textContainer}>
+              <p className={styles.columnText}>{product.brand}</p>
+            </div>
 
-          <div className={styles.textContainer}>
-            <p className={styles.columnText}>{product.description}</p>
+            <div className={styles.textContainer}>
+              <p className={styles.columnText}>{product.description}</p>
+            </div>
+            <div className={styles.textContainer}>
+              <p className={styles.columnText}>{product.price}</p>
+            </div>
+            <div className={styles.textContainer}>
+              <p className={styles.columnText}>{product.rating}</p>
+            </div>
+            <div className={styles.textContainer}>
+              <p className={styles.columnText}>{product.stock}</p>
+            </div>
           </div>
-          <div className={styles.textContainer}>
-            <p className={styles.columnText}>{product.price}</p>
-          </div>
-          <div className={styles.textContainer}>
-            <p className={styles.columnText}>{product.rating}</p>
-          </div>
-          <div className={styles.textContainer}>
-            <p className={styles.columnText}>{product.stock}</p>
-          </div>
-        </div>
-      ))}
+        ))}
+      </div>
     </section>
   );
 };
