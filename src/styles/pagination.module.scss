@@ -1,0 +1,38 @@
+@import "variables.scss";
+
+.container {
+  width: 100%;
+  display: flex;
+  gap: 20px;
+  padding: 30px 0;
+  align-items: center;
+  justify-content: center;
+}
+
+.perPageContainer {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.select {
+  width: 100px;
+  height: 30px;
+  border: 1px solid $border;
+}
+
+.option {
+  background-color: white;
+}
+
+.pageContainer {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+
+.button {
+  border-radius: 3px;
+  border: 1px solid $border;
+  cursor: pointer;
+}

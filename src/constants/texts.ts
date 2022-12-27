@@ -12,4 +12,5 @@ export const texts = {
   price: "가격",
   grade: "평점",
   stock: "재고",
+  perPage: "페이지당 행 : ",
 };
