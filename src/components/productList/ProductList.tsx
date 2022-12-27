@@ -1,17 +1,17 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { fetchProducts } from "../../apis/api";
-import { productInfo } from "../../constants/interfaces";
 import styles from "../../styles/productList.module.scss";
 import Pagination from "../search/Pagination";
 import Table from "./Table";
+import { setProducts } from "../..//stores/products";
 
 const ProductList = () => {
-  const [products, setProducts] = useState<Array<productInfo>>([]);
+  const dispatch = useDispatch();
 
   const getProductInfos = async () => {
-    const productInfos = await fetchProducts(50);
-    console.log(productInfos);
-    setProducts([...productInfos.products]);
+    const productInfos = await fetchProducts(20);
+    dispatch(setProducts(productInfos.products));
   };
 
   useEffect(() => {
@@ -20,8 +20,7 @@ const ProductList = () => {
 
   return (
     <section className={styles.container}>
-      <Table products={products} />
-      <Pagination pages={Math.floor(products.length / 10)} />
+      <Table />
     </section>
   );
 };

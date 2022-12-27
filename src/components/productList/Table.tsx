@@ -1,12 +1,10 @@
 import { texts } from "../../constants/texts";
 import styles from "../../styles/table.module.scss";
-import { productInfo } from "../../constants/interfaces";
+import { useSelector } from "react-redux";
+import { productsState } from "../../stores/products";
 
-interface tableProps {
-  products: Array<productInfo>;
-}
-
-const Table = ({ products }: tableProps) => {
+const Table = () => {
+  const productList = useSelector((state: productsState) => state.products);
   return (
     <section className={styles.container}>
       <div className={styles.column}>
@@ -19,8 +17,8 @@ const Table = ({ products }: tableProps) => {
         <p className={styles.divisionText}>{texts.stock}</p>
       </div>
       <div className={styles.productlist}>
-        {products.map((product) => (
-          <div className={styles.column}>
+        {productList.map((product, index) => (
+          <div key={index} className={styles.column}>
             <div className={styles.textContainer}>
               <p className={styles.columnText}>{product.id}</p>
             </div>
