@@ -2,8 +2,8 @@ import { MouseEventHandler, useEffect, useState } from "react";
 import { texts } from "../../constants/texts";
 import styles from "../../styles/pagination.module.scss";
 import Select from "../Select";
-import { useSelector } from "react-redux";
-import { productsState } from "../..//stores/products";
+import { useDispatch, useSelector } from "react-redux";
+import { productsState, setPerPage } from "../..//stores/products";
 interface paginationProps {
   onPerPageChange?: MouseEventHandler;
   onPageChange?: MouseEventHandler;
@@ -12,9 +12,9 @@ interface paginationProps {
 const Pagination = (props: paginationProps) => {
   const pageOption = [10, 20, 50];
   const { products, perPage } = useSelector((state: productsState) => state);
+  const dispatch = useDispatch();
 
   const [pageArray, setPageArray] = useState<number[]>([]);
-  console.log(Math.floor(products.length / perPage), pageArray);
 
   useEffect(() => {
     const pageLength = Math.floor(products.length / perPage);
@@ -25,11 +25,15 @@ const Pagination = (props: paginationProps) => {
 
     setPageArray(buttonArr);
   }, [products, perPage]);
+
+  const changePerPage = (page: number) => {
+    dispatch(setPerPage(page));
+  };
   return (
     <section className={styles.container}>
       <div className={styles.perPageContainer}>
         {texts.perPage}
-        <Select options={pageOption} />
+        <Select options={pageOption} onChange={changePerPage} />
       </div>
       <div className={styles.pageContainer}>
         <link

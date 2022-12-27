@@ -11,8 +11,6 @@ const ProductList = () => {
 
   const getProductInfos = async () => {
     const productInfos = await fetchProducts(100);
-    console.log(productInfos);
-
     dispatch(setProducts(productInfos.products));
   };
 

@@ -1,18 +1,21 @@
 import styles from "../styles/select.module.scss";
-import { useState } from "react";
+import React, { useState } from "react";
 
 interface selectProps {
   options: Array<string> | Array<number>;
+  onChange?: Function;
 }
 
-const Select = ({ options }: selectProps) => {
+const Select = (props: selectProps) => {
   const [open, setOpen] = useState<boolean>(false);
-  const [selectedValue, setSelectedValue] = useState(options[0]);
+  const [selectedValue, setSelectedValue] = useState(props.options[0]);
 
-  const setCurrentValue = (event: React.MouseEvent<HTMLLIElement>) => {
-    const value = event.currentTarget.value;
+  const setCurrentValue = (event: React.MouseEvent<HTMLUListElement>) => {
+    const value = (event.target as HTMLLIElement).value;
     setSelectedValue(value);
     setOpen(false);
+
+    props.onChange && props.onChange(Number(value));
   };
 
   return (
@@ -44,14 +47,9 @@ const Select = ({ options }: selectProps) => {
       )}
 
       {open && (
-        <ul className={styles.optionList}>
-          {options.map((option) => (
-            <li
-              key={option}
-              className={styles.optionItem}
-              value={option}
-              onClick={setCurrentValue}
-            >
+        <ul className={styles.optionList} onClick={setCurrentValue}>
+          {props.options.map((option) => (
+            <li key={option} className={styles.optionItem} value={option}>
               {option}
             </li>
           ))}
