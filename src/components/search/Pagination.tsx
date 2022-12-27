@@ -1,15 +1,30 @@
-import { useState } from "react";
+import { MouseEventHandler, useEffect, useState } from "react";
 import { texts } from "../../constants/texts";
 import styles from "../../styles/pagination.module.scss";
 import Select from "../Select";
-
+import { useSelector } from "react-redux";
+import { productsState } from "../..//stores/products";
 interface paginationProps {
-  pages: number;
+  onPerPageChange?: MouseEventHandler;
+  onPageChange?: MouseEventHandler;
 }
 
-const Pagination = ({ pages }: paginationProps) => {
+const Pagination = (props: paginationProps) => {
   const pageOption = [10, 20, 50];
-  const [pageArray, setPageArray] = useState(new Array(pages).fill(0));
+  const { products, perPage } = useSelector((state: productsState) => state);
+
+  const [pageArray, setPageArray] = useState<number[]>([]);
+  console.log(Math.floor(products.length / perPage), pageArray);
+
+  useEffect(() => {
+    const pageLength = Math.floor(products.length / perPage);
+    const buttonArr = [];
+    for (let i = 1; i <= pageLength; i++) {
+      buttonArr.push(i);
+    }
+
+    setPageArray(buttonArr);
+  }, [products, perPage]);
   return (
     <section className={styles.container}>
       <div className={styles.perPageContainer}>
@@ -28,8 +43,10 @@ const Pagination = ({ pages }: paginationProps) => {
         <span className={`material-symbols-outlined ${styles.button}`}>
           chevron_left
         </span>
-        {pageArray.map((page, index) => (
-          <button className={styles.button}>{index + 1}</button>
+        {pageArray.map((page) => (
+          <button key={page} className={styles.button}>
+            {page}
+          </button>
         ))}
         <span className={`material-symbols-outlined ${styles.button}`}>
           chevron_right

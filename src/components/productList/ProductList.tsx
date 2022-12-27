@@ -10,7 +10,9 @@ const ProductList = () => {
   const dispatch = useDispatch();
 
   const getProductInfos = async () => {
-    const productInfos = await fetchProducts(20);
+    const productInfos = await fetchProducts(100);
+    console.log(productInfos);
+
     dispatch(setProducts(productInfos.products));
   };
 
@@ -21,6 +23,7 @@ const ProductList = () => {
   return (
     <section className={styles.container}>
       <Table />
+      <Pagination />
     </section>
   );
 };
