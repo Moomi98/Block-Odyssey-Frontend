@@ -1,4 +1,4 @@
-import { MouseEventHandler, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { texts } from "../../constants/texts";
 import styles from "../../styles/pagination.module.scss";
 import Select from "../Select";
@@ -12,27 +12,25 @@ import {
 
 const Pagination = () => {
   const pageOption = [10, 20, 50];
-  const { products, perPage, currentPage } = useSelector(
-    (state: productsState) => state
-  );
+  const { products, perPage, currentPage, showedProducts, targetedProducts } =
+    useSelector((state: productsState) => state);
   const dispatch = useDispatch();
 
   const [pageArray, setPageArray] = useState<number[]>([]);
 
   useEffect(() => {
-    const pageLength = Math.floor(products.length / perPage);
+    const pageLength = Math.ceil(targetedProducts.length / perPage);
     const buttonArr = [];
     for (let i = 1; i <= pageLength; i++) {
       buttonArr.push(i);
     }
 
     setPageArray(buttonArr);
-  }, [products, perPage]);
+  }, [products, perPage, targetedProducts]);
 
   const changePerPage = (page: number) => {
     dispatch(setPerPage(page));
     dispatch(setCurrentPage(1));
-
     dispatch(setShowedProducts());
   };
 
@@ -43,7 +41,7 @@ const Pagination = () => {
   };
 
   const movePageForward = () => {
-    const pageLength = Math.floor(products.length / perPage);
+    const pageLength = Math.floor(targetedProducts.length / perPage);
     if (pageLength < currentPage + 1) return;
     dispatch(setCurrentPage(currentPage + 1));
     dispatch(setShowedProducts());
@@ -61,10 +59,12 @@ const Pagination = () => {
   };
 
   const movePageLast = () => {
-    const pageLength = Math.floor(products.length / perPage);
+    const pageLength = Math.floor(targetedProducts.length / perPage);
     dispatch(setCurrentPage(pageLength));
     dispatch(setShowedProducts());
   };
+
+  const checkButtonShow = () => {};
 
   return (
     <section className={styles.container}>
@@ -73,6 +73,10 @@ const Pagination = () => {
         <Select options={pageOption} onChange={changePerPage} />
       </div>
       <div className={styles.pageContainer}>
+        <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0"
+        />
         <link
           rel="stylesheet"
           href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0"
@@ -109,10 +113,16 @@ const Pagination = () => {
             }
             value={page}
             onClick={changeCurrentPage}
+            // style={{
+            //   display: currentPage > 4 && currentPage < 7 ? "block" : "none",
+            // }}
           >
             {page}
           </button>
         ))}
+        {/* {currentPage < Math.floor(products.length / perPage) - 3 && (
+          <span className="material-symbols-outlined">more_horiz</span>
+        )} */}
         <span
           className={`material-symbols-outlined ${styles.button}`}
           onClick={movePageForward}

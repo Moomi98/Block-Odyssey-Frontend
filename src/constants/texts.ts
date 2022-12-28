@@ -14,3 +14,14 @@ export const texts = {
   stock: "재고",
   perPage: "페이지당 행 : ",
 };
+
+export const searchOptionMap: searchOptionTypes = {
+  전체: "all",
+  상품명: "title",
+  브랜드: "brand",
+  상품내용: "description",
+};
+
+interface searchOptionTypes {
+  [key: string]: string;
+}

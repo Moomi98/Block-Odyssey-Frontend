@@ -4,7 +4,11 @@ import { fetchProducts } from "../../apis/api";
 import styles from "../../styles/productList.module.scss";
 import Pagination from "../search/Pagination";
 import Table from "./Table";
-import { setProducts, setShowedProducts } from "../..//stores/products";
+import {
+  setProducts,
+  setShowedProducts,
+  setTargetedProducts,
+} from "../..//stores/products";
 
 const ProductList = () => {
   const dispatch = useDispatch();
@@ -12,6 +16,7 @@ const ProductList = () => {
   const getProductInfos = async () => {
     const productInfos = await fetchProducts(100);
     dispatch(setProducts(productInfos.products));
+    dispatch(setTargetedProducts(productInfos.products));
     dispatch(setShowedProducts());
   };
 

@@ -1,4 +1,5 @@
 export interface productInfo {
+  [key: string]: string | number | Array<number> | Array<string>;
   id: number;
   brand: string;
   categray: string;

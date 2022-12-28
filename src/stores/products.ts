@@ -3,6 +3,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 export interface productsState {
   products: productInfo[];
+  targetedProducts: productInfo[];
   showedProducts: productInfo[];
   perPage: number;
   currentPage: number;
@@ -10,6 +11,7 @@ export interface productsState {
 
 export const initialState: productsState = {
   products: [],
+  targetedProducts: [],
   showedProducts: [],
   perPage: 10,
   currentPage: 1,
@@ -28,8 +30,11 @@ export const productSlice = createSlice({
     setCurrentPage(state, action: PayloadAction<number>) {
       state.currentPage = action.payload;
     },
+    setTargetedProducts(state, action: PayloadAction<productInfo[]>) {
+      state.targetedProducts = action.payload;
+    },
     setShowedProducts(state) {
-      state.showedProducts = state.products.slice(
+      state.showedProducts = state.targetedProducts.slice(
         state.perPage * (state.currentPage - 1),
         state.perPage * state.currentPage
       );
@@ -37,6 +42,11 @@ export const productSlice = createSlice({
   },
 });
 
-export const { setProducts, setPerPage, setCurrentPage, setShowedProducts } =
-  productSlice.actions;
+export const {
+  setProducts,
+  setPerPage,
+  setCurrentPage,
+  setShowedProducts,
+  setTargetedProducts,
+} = productSlice.actions;
 export default productSlice.reducer;
