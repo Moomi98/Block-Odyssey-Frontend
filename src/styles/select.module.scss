@@ -15,18 +15,29 @@
 .label {
   width: 100%;
   padding: 5px;
+  cursor: pointer;
 }
 
 .arrow {
   cursor: pointer;
 }
 
-.optionList {
+.optionList_up {
   position: absolute;
   background-color: white;
   border: 1px solid $border;
-  width: 70px;
+  width: 100%;
   bottom: 12px;
+  left: -1px;
+  padding: 5px 10px;
+}
+
+.optionList_down {
+  position: absolute;
+  background-color: white;
+  border: 1px solid $border;
+  width: 100%;
+  top: 10px;
   left: -1px;
   padding: 5px 10px;
 }

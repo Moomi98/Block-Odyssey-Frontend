@@ -69,8 +69,8 @@ const Pagination = () => {
   return (
     <section className={styles.container}>
       <div className={styles.perPageContainer}>
-        {texts.perPage}
-        <Select options={pageOption} onChange={changePerPage} />
+        <p>{texts.perPage}</p>
+        <Select options={pageOption} onChange={changePerPage} width={70} />
       </div>
       <div className={styles.pageContainer}>
         <link
