@@ -4,7 +4,9 @@ import { useSelector } from "react-redux";
 import { productsState } from "../../stores/products";
 
 const Table = () => {
-  const productList = useSelector((state: productsState) => state.products);
+  const productList = useSelector(
+    (state: productsState) => state.showedProducts
+  );
   return (
     <section className={styles.container}>
       <div className={styles.column}>

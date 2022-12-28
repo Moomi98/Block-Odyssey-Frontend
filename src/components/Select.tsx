@@ -15,6 +15,8 @@ const Select = (props: selectProps) => {
     setSelectedValue(value);
     setOpen(false);
 
+    console.log(value);
+
     props.onChange && props.onChange(Number(value));
   };
 

@@ -28,22 +28,15 @@ export const productSlice = createSlice({
     setCurrentPage(state, action: PayloadAction<number>) {
       state.currentPage = action.payload;
     },
-  },
-  extraReducers: {
-    ["productSlice/setPerPage"]: (state) => {
+    setShowedProducts(state) {
       state.showedProducts = state.products.slice(
-        state.perPage * state.currentPage,
-        state.perPage + 1
-      );
-    },
-    ["productSlice/setCurrentPage"]: (state) => {
-      state.showedProducts = state.products.slice(
-        state.perPage * state.currentPage,
-        state.perPage + 1
+        state.perPage * (state.currentPage - 1),
+        state.perPage * state.currentPage
       );
     },
   },
 });
 
-export const { setProducts, setPerPage, setCurrentPage } = productSlice.actions;
+export const { setProducts, setPerPage, setCurrentPage, setShowedProducts } =
+  productSlice.actions;
 export default productSlice.reducer;

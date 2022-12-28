@@ -3,7 +3,11 @@ import { texts } from "../../constants/texts";
 import styles from "../../styles/pagination.module.scss";
 import Select from "../Select";
 import { useDispatch, useSelector } from "react-redux";
-import { productsState, setPerPage } from "../..//stores/products";
+import {
+  productsState,
+  setPerPage,
+  setShowedProducts,
+} from "../..//stores/products";
 interface paginationProps {
   onPerPageChange?: MouseEventHandler;
   onPageChange?: MouseEventHandler;
@@ -28,6 +32,7 @@ const Pagination = (props: paginationProps) => {
 
   const changePerPage = (page: number) => {
     dispatch(setPerPage(page));
+    dispatch(setShowedProducts());
   };
   return (
     <section className={styles.container}>
