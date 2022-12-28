@@ -25,14 +25,16 @@ const Table = () => {
               <p className={styles.columnText}>{product.id}</p>
             </div>
             <div className={styles.textContainer}>
-              <p className={styles.columnText}>{product.title}</p>
+              <p className={styles.columnText_title}>{product.title}</p>
             </div>
             <div className={styles.textContainer}>
-              <p className={styles.columnText}>{product.brand}</p>
+              <p className={styles.columnText_brand}>{product.brand}</p>
             </div>
 
             <div className={styles.textContainer}>
-              <p className={styles.columnText}>{product.description}</p>
+              <p className={styles.columnText_description}>
+                {product.description}
+              </p>
             </div>
             <div className={styles.textContainer}>
               <p className={styles.columnText}>{product.price}</p>

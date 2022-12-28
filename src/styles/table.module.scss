@@ -43,6 +43,39 @@
 
 .columnText {
   margin: 0 auto;
+  max-width: 100px;
+  font-size: 12px;
+  font-weight: bold;
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.columnText_title {
+  margin: 0 auto;
+  max-width: 150px;
+  font-size: 12px;
+  font-weight: bold;
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.columnText_brand {
+  margin: 0 auto;
+  max-width: 150px;
+  font-size: 12px;
+  font-weight: bold;
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.columnText_description {
+  margin: 0 auto;
   max-width: 250px;
   font-size: 12px;
   font-weight: bold;
