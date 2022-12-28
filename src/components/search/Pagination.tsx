@@ -9,12 +9,8 @@ import {
   setPerPage,
   setShowedProducts,
 } from "../..//stores/products";
-interface paginationProps {
-  onPerPageChange?: MouseEventHandler;
-  onPageChange?: MouseEventHandler;
-}
 
-const Pagination = (props: paginationProps) => {
+const Pagination = () => {
   const pageOption = [10, 20, 50];
   const { products, perPage, currentPage } = useSelector(
     (state: productsState) => state
@@ -108,7 +104,9 @@ const Pagination = (props: paginationProps) => {
         {pageArray.map((page) => (
           <button
             key={page}
-            className={styles.button}
+            className={
+              page === currentPage ? styles.button_currentPage : styles.button
+            }
             value={page}
             onClick={changeCurrentPage}
           >

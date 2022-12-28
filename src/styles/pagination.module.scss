@@ -38,4 +38,16 @@
   border: 1px solid $border;
   cursor: pointer;
   background-color: white;
+  &:hover {
+    background-color: $buttonClicked;
+  }
+}
+
+.button_currentPage {
+  width: 26px;
+  height: 26px;
+  border-radius: 3px;
+  border: 1px solid $border;
+  cursor: pointer;
+  background-color: $buttonClicked;
 }
