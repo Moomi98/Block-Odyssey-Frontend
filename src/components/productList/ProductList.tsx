@@ -13,7 +13,7 @@ import {
 const ProductList = () => {
   const dispatch = useDispatch();
 
-  const getProductInfos = async () => {
+  const setProductInfos = async () => {
     const productInfos = await fetchProducts(100);
     dispatch(setProducts(productInfos.products));
     const targetedProducts = sessionStorage.getItem("targetedProducts");
@@ -26,7 +26,7 @@ const ProductList = () => {
   };
 
   useEffect(() => {
-    getProductInfos();
+    setProductInfos();
   }, []);
 
   return (
