@@ -6,7 +6,7 @@ function App() {
   return (
     <div className={styles.app}>
       <Search />
-      <Result resultNumber={19} />
+      <Result />
       <ProductList />
     </div>
   );
