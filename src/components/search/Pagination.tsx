@@ -42,7 +42,7 @@ const Pagination = () => {
   };
 
   const movePageForward = () => {
-    const pageLength = Math.floor(targetedProducts.length / perPage);
+    const pageLength = Math.ceil(targetedProducts.length / perPage);
     if (pageLength < currentPage + 1) return;
     dispatch(setCurrentPage(currentPage + 1));
     dispatch(setShowedProducts());
@@ -60,7 +60,7 @@ const Pagination = () => {
   };
 
   const movePageLast = () => {
-    const pageLength = Math.floor(targetedProducts.length / perPage);
+    const pageLength = Math.ceil(targetedProducts.length / perPage);
     dispatch(setCurrentPage(pageLength));
     dispatch(setShowedProducts());
   };
