@@ -24,27 +24,42 @@
 
 .optionList_up {
   position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   background-color: white;
   border: 1px solid $border;
   width: 100%;
   bottom: 12px;
   left: -1px;
-  padding: 5px 10px;
+  padding: 0;
 }
 
 .optionList_down {
   position: absolute;
   background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   border: 1px solid $border;
   width: 100%;
-  top: 10px;
-  left: -1px;
-  padding: 5px 10px;
+  top: 12px;
+  left: 0px;
+  padding: 0;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 5px 5px 3px;
 }
 
 .optionItem {
+  width: 100%;
   list-style: none;
-  padding: 5px 0;
-  text-align: start;
+  padding: 7px 0;
   cursor: pointer;
+  text-align: center;
+  &:hover {
+    background-color: $buttonClicked;
+  }
 }
