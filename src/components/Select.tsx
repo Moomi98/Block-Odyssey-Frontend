@@ -6,17 +6,19 @@ interface selectProps {
   onChange?: Function;
   width?: number;
   listDirection?: string;
+  label?: string;
 }
 
 const Select = (props: selectProps) => {
   const [open, setOpen] = useState<boolean>(false);
-  const [selectedValue, setSelectedValue] = useState(props.options[0]);
+  const [selectedValue, setSelectedValue] = useState(
+    props.label || props.options[0]
+  );
 
   const setCurrentValue = (event: React.MouseEvent<HTMLUListElement>) => {
     const value = (event.target as HTMLLIElement).innerText;
     setSelectedValue(value);
     setOpen(false);
-    console.log(value, props.options, (event.target as HTMLLIElement).value);
 
     props.onChange && props.onChange(value);
   };

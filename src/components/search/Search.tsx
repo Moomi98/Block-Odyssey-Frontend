@@ -1,4 +1,4 @@
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { texts, searchOptionMap } from "../../constants/texts";
 import styles from "../../styles/search.module.scss";
@@ -14,17 +14,20 @@ import { productInfo } from "../../constants/interfaces";
 const Search = () => {
   const { products } = useSelector((state: productsState) => state);
   const dispatch = useDispatch();
-  const [searchType, setSearchType] = useState<string>("전체");
+  const searchRef = useRef<HTMLInputElement>(null);
+  const [searchType, setSearchType] = useState<string>(
+    sessionStorage.getItem("searchType") || "전체"
+  );
   const changeSearchType = (value: string) => {
     setSearchType(value);
+    sessionStorage.setItem("searchType", value);
   };
 
   const searchProducts = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
-    const query = formData.get("search") as string;
+    const query = (formData.get("search") as string).toLowerCase();
     const type = searchOptionMap[searchType];
-    console.log(type);
 
     let searchedProducts: productInfo[];
 
@@ -39,10 +42,34 @@ const Search = () => {
         (product[type] as string).toLowerCase().match(new RegExp(query))
       );
     }
+
     dispatch(setTargetedProducts(searchedProducts));
     dispatch(setShowedProducts());
     dispatch(setCurrentPage(1));
+    setSessionStorage(searchedProducts, query);
   };
+
+  const setSessionStorage = (
+    searchedProducts: productInfo[],
+    keywords: string
+  ) => {
+    sessionStorage.setItem(
+      "targetedProducts",
+      JSON.stringify(searchedProducts)
+    );
+    sessionStorage.setItem("keywords", keywords);
+  };
+
+  const setKeywords = () => {
+    const keywords = sessionStorage.getItem("keywords");
+    if (keywords && searchRef.current) {
+      searchRef.current.value = keywords;
+    }
+  };
+
+  useEffect(() => {
+    setKeywords();
+  }, []);
 
   return (
     <section className={styles.container}>
@@ -56,9 +83,10 @@ const Search = () => {
             width={100}
             listDirection={"down"}
             onChange={changeSearchType}
+            label={searchType}
           />
           <form className={styles.search} onSubmit={searchProducts}>
-            <input className={styles.searchBar} name="search" />
+            <input className={styles.searchBar} name="search" ref={searchRef} />
             <button className={styles.searchButton}>{texts.inquiry}</button>
           </form>
         </div>

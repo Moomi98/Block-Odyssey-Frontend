@@ -16,7 +16,12 @@ const ProductList = () => {
   const getProductInfos = async () => {
     const productInfos = await fetchProducts(100);
     dispatch(setProducts(productInfos.products));
-    dispatch(setTargetedProducts(productInfos.products));
+    const targetedProducts = sessionStorage.getItem("targetedProducts");
+    if (targetedProducts) {
+      dispatch(setTargetedProducts(JSON.parse(targetedProducts)));
+    } else {
+      dispatch(setTargetedProducts(productInfos.products));
+    }
     dispatch(setShowedProducts());
   };
 

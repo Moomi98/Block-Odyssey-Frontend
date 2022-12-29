@@ -1,12 +1,20 @@
 import { texts } from "../../constants/texts";
 import styles from "../../styles/table.module.scss";
-import { useSelector } from "react-redux";
-import { productsState } from "../../stores/products";
+import { useDispatch, useSelector } from "react-redux";
+import { productsState, setTargetedProducts } from "../../stores/products";
+import { useEffect } from "react";
 
 const Table = () => {
+  const dispatch = useDispatch();
   const productList = useSelector(
     (state: productsState) => state.showedProducts
   );
+
+  useEffect(() => {
+    const targetedProducts = sessionStorage.getItem("targetedProducts");
+    if (!targetedProducts) return;
+    dispatch(setTargetedProducts(JSON.parse(targetedProducts)));
+  }, [dispatch]);
   return (
     <section className={styles.container}>
       <div className={styles.column}>
