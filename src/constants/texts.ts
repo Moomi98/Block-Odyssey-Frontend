@@ -13,6 +13,11 @@ export const texts = {
   grade: "평점",
   stock: "재고",
   perPage: "페이지당 행 : ",
+  sessions: {
+    targetedProducts: "targetedProducts",
+    keywords: "keywords",
+    searchType: "searchType",
+  },
 };
 
 export const searchOptionMap: searchOptionTypes = {

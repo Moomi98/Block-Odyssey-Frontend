@@ -16,11 +16,11 @@ const Search = () => {
   const dispatch = useDispatch();
   const searchRef = useRef<HTMLInputElement>(null);
   const [searchType, setSearchType] = useState<string>(
-    sessionStorage.getItem("searchType") || "전체"
+    sessionStorage.getItem(texts.sessions.searchType) || texts.searchOptions[0]
   );
   const changeSearchType = (value: string) => {
     setSearchType(value);
-    sessionStorage.setItem("searchType", value);
+    sessionStorage.setItem(texts.sessions.searchType, value);
   };
 
   const searchProducts = (event: FormEvent<HTMLFormElement>) => {
@@ -54,14 +54,14 @@ const Search = () => {
     keywords: string
   ) => {
     sessionStorage.setItem(
-      "targetedProducts",
+      texts.sessions.targetedProducts,
       JSON.stringify(searchedProducts)
     );
-    sessionStorage.setItem("keywords", keywords);
+    sessionStorage.setItem("keywords", texts.sessions.keywords);
   };
 
   const setKeywords = () => {
-    const keywords = sessionStorage.getItem("keywords");
+    const keywords = sessionStorage.getItem(texts.sessions.keywords);
     if (keywords && searchRef.current) {
       searchRef.current.value = keywords;
     }
