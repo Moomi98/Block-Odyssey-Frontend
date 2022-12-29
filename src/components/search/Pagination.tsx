@@ -12,8 +12,9 @@ import {
 
 const Pagination = () => {
   const pageOption = [10, 20, 50];
-  const { products, perPage, currentPage, showedProducts, targetedProducts } =
-    useSelector((state: productsState) => state);
+  const { products, perPage, currentPage, targetedProducts } = useSelector(
+    (state: productsState) => state
+  );
   const dispatch = useDispatch();
 
   const [pageArray, setPageArray] = useState<number[]>([]);
@@ -64,8 +65,6 @@ const Pagination = () => {
     dispatch(setShowedProducts());
   };
 
-  const checkButtonShow = () => {};
-
   return (
     <section className={styles.container}>
       <div className={styles.perPageContainer}>
@@ -113,16 +112,10 @@ const Pagination = () => {
             }
             value={page}
             onClick={changeCurrentPage}
-            // style={{
-            //   display: currentPage > 4 && currentPage < 7 ? "block" : "none",
-            // }}
           >
             {page}
           </button>
         ))}
-        {/* {currentPage < Math.floor(products.length / perPage) - 3 && (
-          <span className="material-symbols-outlined">more_horiz</span>
-        )} */}
         <span
           className={`material-symbols-outlined ${styles.button}`}
           onClick={movePageForward}
